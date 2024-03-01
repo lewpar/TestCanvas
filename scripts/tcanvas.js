@@ -48,8 +48,7 @@ function init()
     winWidth = canvas.width;
     winHeight = canvas.height;
 
-    clear();
-    drawObjects();
+    render();
 
     addEventListener("resize", (event) => {
         canvas.width = window.innerWidth;
@@ -58,8 +57,7 @@ function init()
         winWidth = canvas.width;
         winHeight = canvas.height;
 
-        clear();
-        drawObjects();
+        render();
     });
 
     // Zoom
@@ -69,8 +67,7 @@ function init()
 
         scale = Math.min(Math.max(0.5, scale), 5);
 
-        clear();
-        drawObjects();
+        render();
 
         console.log("Scrolling");
     });
@@ -100,8 +97,7 @@ function init()
 
             console.log(`Diff: ${diffX}:${diffY}`)
 
-            clear();
-            drawObjects();
+            render();
 
             didTranslating = true;
         }
@@ -121,10 +117,12 @@ function init()
     });   
 }
 
-function drawObjects()
+function render()
 {
     let canvas = document.getElementById('t-canvas');
     let ctx = canvas.getContext('2d');
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // A dot every 5 px;
     let dotSpacing = 15;
@@ -191,23 +189,13 @@ function trySelectObject(x, y)
                 selectedObject = objects[i];
             }
 
-            clear();
-            drawObjects();
+            render();
             return;
         }
     }
 
     selectedObject = null;
-    clear();
-    drawObjects();
-}
-
-function clear()
-{
-    let canvas = document.getElementById('t-canvas');
-    let ctx = canvas.getContext('2d');
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    render();
 }
 
 init();
