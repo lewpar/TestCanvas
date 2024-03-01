@@ -135,6 +135,7 @@ function drawObjects()
     ctx.font = "10px Verdana";
     ctx.textBaseline = "top";
     ctx.fillText(`Zoom: ${Number(scale).toFixed(2)}`, 5, 5);
+    ctx.fillText(`Selected: ${selectedObject == null ? "None" : selectedObject.id}`, 5, 20);
 }
 
 function testForObject(x, y)
@@ -151,13 +152,28 @@ function testForObject(x, y)
 
         if(x > objX && y > objY && x < (objX + objWidth) && y < (objY + objHeight))
         {
-            selectedObject = objects[i];
+            let foundObj = objects[i];
+
+            // Deselect the already selected object.
+            if(selectedObject != null && 
+                selectedObject.id == foundObj.id)
+            {
+                selectedObject = null;
+            }
+            else
+            {
+                selectedObject = objects[i];
+            }
 
             clear();
             drawObjects();
             return;
         }
     }
+
+    selectedObject = null;
+    clear();
+    drawObjects();
 }
 
 function clear()
