@@ -1,6 +1,6 @@
 let scale = 1.0;
 
-let translating = false;
+let isTranslating = false;
 let didTranslating = false;
 
 let oldX = 0;
@@ -13,6 +13,10 @@ let selectedObject = null;
 
 let winWidth = 0;
 let winHeight = 0;
+
+
+const MOUSE_LEFT = 0;
+const MOUSE_RIGHT = 1;
 
 let objects = [
     { 
@@ -74,38 +78,81 @@ function init()
 
     // Translate
     addEventListener("mousedown", (event) => {
-        oldX = event.clientX;
-        oldY = event.clientY;
-        console.log("Translating");
-        translating = true;
+        switch(event.button)
+        {
+            case MOUSE_LEFT:
+                startTranslate(event, true);
+                break;
+
+            case MOUSE_RIGHT:
+                event.preventDefault();
+                break;
+        }
     });
 
     addEventListener("mousemove", (event) => {
-        if(translating)
+        switch(event.button)
         {
-            let curX = event.clientX;
-            let curY = event.clientY;
-    
-            let diffX = -(oldX - curX);
-            let diffY = -(oldY - curY);
-
-            deltaX += diffX;
-            deltaY += diffY;
-    
-            oldX = curX;
-            oldY = curY;
-
-            console.log(`Diff: ${diffX}:${diffY}`)
-
-            render();
-
-            didTranslating = true;
+            case MOUSE_LEFT:
+                translate(event);
+                break;
         }
     });
 
     addEventListener("mouseup", (event) => {
-        translating = false;
-        console.log("Done translating");
+        switch(event.button)
+        {
+            case MOUSE_LEFT:
+                startTranslate(event, false);
+                break;
+
+            case MOUSE_RIGHT:
+                event.preventDefault();
+                break;
+        }
+    });   
+
+    addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+    });
+}
+
+function translate(event)
+{
+    if(isTranslating)
+    {
+        let curX = event.clientX;
+        let curY = event.clientY;
+
+        let diffX = -(oldX - curX);
+        let diffY = -(oldY - curY);
+
+        deltaX += diffX;
+        deltaY += diffY;
+
+        oldX = curX;
+        oldY = curY;
+
+        console.log(`Diff: ${diffX}:${diffY}`)
+
+        render();
+
+        didTranslating = true;
+    }
+}
+
+function startTranslate(event, translating)
+{
+    if(translating)
+    {
+        oldX = event.clientX;
+        oldY = event.clientY;
+
+        isTranslating = true;
+    }
+    else
+    {
+        isTranslating = false;
 
         // Prevents clicking objects at the end of translating the screen.
         if(!didTranslating)
@@ -114,7 +161,7 @@ function init()
         }
 
         didTranslating = false;
-    });   
+    }
 }
 
 function render()
