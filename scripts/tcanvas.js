@@ -11,6 +11,9 @@ let deltaY = 0;
 
 let selectedObject = null;
 
+let winWidth = 0;
+let winHeight = 0;
+
 let objects = [
     { 
         id: 1,
@@ -42,12 +45,18 @@ function init()
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    winWidth = canvas.width;
+    winHeight = canvas.height;
+
     clear();
     drawObjects();
 
     addEventListener("resize", (event) => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+
+        winWidth = canvas.width;
+        winHeight = canvas.height;
 
         clear();
         drawObjects();
@@ -117,6 +126,18 @@ function drawObjects()
     let canvas = document.getElementById('t-canvas');
     let ctx = canvas.getContext('2d');
 
+    // A dot every 5 px;
+    let dotSpacing = 15;
+    let dotSize = 2;
+    for(let x = 0; x < winWidth / dotSpacing; x++)
+    {
+        for(let y = 0; y < winHeight / dotSpacing; y++)
+        {
+            ctx.fillStyle = "#DDDDDD";
+            ctx.fillRect(x * dotSpacing, y * dotSpacing, dotSize, dotSize);
+        }
+    }
+
     for(let i = 0; i < objects.length; i++)
     {
         let obj = objects[i];
@@ -135,10 +156,12 @@ function drawObjects()
 
     ctx.fillStyle = "#000000";
 
-    ctx.font = "10px Verdana";
     ctx.textBaseline = "top";
-    ctx.fillText(`Zoom: ${Number(scale).toFixed(2)}`, 5, 5);
-    ctx.fillText(`Selected: ${selectedObject == null ? "None" : selectedObject.id}`, 5, 20);
+    ctx.font = "bold 16px Verdana";
+    ctx.fillText("TestCanvas", 5, 5);
+    ctx.font = "10px Verdana";
+    ctx.fillText(`Zoom: ${Number(scale).toFixed(2)}`, 5, 25);
+    ctx.fillText(`Selected: ${selectedObject == null ? "None" : selectedObject.id}`, 5, 40);
 }
 
 function testForObject(x, y)
