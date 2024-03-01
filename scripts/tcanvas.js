@@ -114,7 +114,7 @@ function init()
         // Prevents clicking objects at the end of translating the screen.
         if(!didTranslating)
         {
-            testForObject(event.clientX, event.clientY);
+            trySelectObject(event.clientX, event.clientY);
         }
 
         didTranslating = false;
@@ -164,7 +164,7 @@ function drawObjects()
     ctx.fillText(`Selected: ${selectedObject == null ? "None" : selectedObject.id}`, 5, 40);
 }
 
-function testForObject(x, y)
+function trySelectObject(x, y)
 {
     for(let i = 0; i < objects.length; i++)
     {
