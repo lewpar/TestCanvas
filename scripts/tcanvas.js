@@ -46,8 +46,11 @@ function init()
     drawObjects();
 
     addEventListener("resize", (event) => {
-        init();
-        return;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        clear();
+        drawObjects();
     });
 
     // Zoom
