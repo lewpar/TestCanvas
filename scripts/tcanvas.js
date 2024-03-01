@@ -129,6 +129,12 @@ function drawObjects()
 
         ctx.fillRect((obj.x * scale) + deltaX, (obj.y * scale) + deltaY, obj.width * scale, obj.height * scale);
     }
+
+    ctx.fillStyle = "#000000";
+
+    ctx.font = "10px Verdana";
+    ctx.textBaseline = "top";
+    ctx.fillText(`Zoom: ${Number(scale).toFixed(2)}`, 5, 5);
 }
 
 function testForObject(x, y)
