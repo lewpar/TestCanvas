@@ -125,8 +125,8 @@ function render()
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // A dot every 5 px;
-    let dotSpacing = 15;
-    let dotSize = 2;
+    let dotSpacing = 15 * scale;
+    let dotSize = 2 * scale;
     for(let x = 0; x < winWidth / dotSpacing; x++)
     {
         for(let y = 0; y < winHeight / dotSpacing; y++)
