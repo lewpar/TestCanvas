@@ -103,6 +103,12 @@ function init()
         switch(event.button)
         {
             case MOUSE_LEFT:
+                // Prevents clicking objects at the end of translating the screen.
+                if(!didTranslating)
+                {
+                    trySelectObject(event.clientX, event.clientY);
+                }
+
                 startTranslate(event, false);
                 break;
 
@@ -153,13 +159,6 @@ function startTranslate(event, translating)
     else
     {
         isTranslating = false;
-
-        // Prevents clicking objects at the end of translating the screen.
-        if(!didTranslating)
-        {
-            trySelectObject(event.clientX, event.clientY);
-        }
-
         didTranslating = false;
     }
 }
