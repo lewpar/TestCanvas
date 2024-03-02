@@ -1,3 +1,5 @@
+let minScale = 0.5;
+let maxScale = 5;
 let scale = 0.5;
 
 let isTranslating = false;
@@ -69,7 +71,7 @@ function init()
         let diff = (event.deltaY > 0) ? -0.1 : 0.1;
         scale = scale + diff;
 
-        scale = Math.min(Math.max(0.5, scale), 5);
+        scale = Math.min(Math.max(minScale, scale), maxScale);
 
         render();
 
@@ -163,6 +165,12 @@ function startTranslate(event, translating)
         isTranslating = false;
         didTranslating = false;
     }
+}
+
+function zoom(value)
+{
+    scale = value;
+    render();
 }
 
 function render()

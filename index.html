@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <canvas id="t-canvas"></canvas>
+    <div id="container">
+        <canvas id="t-canvas"></canvas>
+        <div id="t-canvas-controls">
+            <input type="range" min="0.5" max="5" step="0.5" onchange="zoom(this.value)">
+        </div>
+    </div>
 
     <script src="./scripts/tcanvas.js"></script>
 </body>
