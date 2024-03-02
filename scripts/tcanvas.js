@@ -177,7 +177,7 @@ function render()
     {
         for(let y = 0; y < winHeight / dotSpacing; y++)
         {
-            ctx.fillStyle = "#DDDDDD";
+            ctx.fillStyle = "#EEEEEE";
             ctx.fillRect(x * dotSpacing, y * dotSpacing, dotSize, dotSize);
         }
     }
@@ -206,6 +206,7 @@ function render()
     ctx.font = "10px Verdana";
     ctx.fillText(`Zoom: ${Number(scale).toFixed(2)}`, 5, 25);
     ctx.fillText(`Selected: ${selectedObject == null ? "None" : selectedObject.id}`, 5, 40);
+    ctx.fillText(`X: ${-deltaX}, Y: ${-deltaY}`, 5, 55);
 }
 
 function trySelectObject(x, y)
