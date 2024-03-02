@@ -1,4 +1,4 @@
-class TCanvasElement extends HTMLElement {
+customElements.define("t-canvas", class TCanvasElement extends HTMLElement {
     canvas = null;
     context = null;
 
@@ -244,6 +244,4 @@ class TCanvasElement extends HTMLElement {
         this.selectedObject = null;
         this.render();
     }
-}
-
-customElements.define("t-canvas", TCanvasElement);
+});
