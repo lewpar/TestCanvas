@@ -61,17 +61,25 @@ customElements.define("t-canvas", class TCanvasElement extends HTMLElement {
         this.canvas = shadow.getElementById("t-canvas");
         this.context = this.canvas.getContext("2d");
 
-        this.canvas.height = window.innerHeight;
-        this.canvas.width = window.innerWidth;
-
-        this.winHeight = this.canvas.height;
-        this.winWidth = this.canvas.width;
+        this.updateSize();
 
         this.addEventListener("wheel", this.onScroll);
         this.addEventListener("mousedown", this.onMouseDown);
         this.addEventListener("mousemove", this.onMouseMove);
         this.addEventListener("mouseup", this.onMouseUp);
         this.addEventListener("contextmenu", (event) => { event.preventDefault(); });
+
+        window.addEventListener("resize", (event) => { this.updateSize(); });
+
+        this.render();
+    }
+
+    updateSize() {
+        this.canvas.height = this.parentElement.clientHeight;
+        this.canvas.width = this.parentElement.clientWidth;
+
+        this.winHeight = this.canvas.height;
+        this.winWidth = this.canvas.width;
 
         this.render();
     }
