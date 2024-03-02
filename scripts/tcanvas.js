@@ -69,13 +69,7 @@ function init()
     // Zoom
     canvas.addEventListener("wheel", (event) => {
         let diff = (event.deltaY > 0) ? -0.1 : 0.1;
-        scale = scale + diff;
-
-        scale = Math.min(Math.max(minScale, scale), maxScale);
-
-        render();
-
-        console.log("Scrolling");
+        zoom(scale + diff);
     });
 
     // Translate
@@ -169,7 +163,7 @@ function startTranslate(event, translating)
 
 function zoom(value)
 {
-    scale = value;
+    scale = Math.min(Math.max(minScale, value), maxScale);
     render();
 }
 
