@@ -1,4 +1,4 @@
-let scale = 1.0;
+let scale = 0.5;
 
 let isTranslating = false;
 let didTranslating = false;
@@ -6,8 +6,8 @@ let didTranslating = false;
 let oldX = 0;
 let oldY = 0;
 
-let deltaX = 0;
-let deltaY = 0;
+let deltaX = 100;
+let deltaY = 100;
 
 let selectedObject = null;
 
@@ -46,13 +46,15 @@ function init()
 {
     let canvas = document.getElementById('t-canvas');
     
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    //canvas.width = window.innerWidth;
+    //canvas.height = window.innerHeight;
+    canvas.width = 640;
+    canvas.height = 480;
 
     winWidth = canvas.width;
     winHeight = canvas.height;
 
-    addEventListener("resize", (event) => {
+    /*addEventListener("resize", (event) => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
@@ -60,7 +62,7 @@ function init()
         winHeight = canvas.height;
 
         render();
-    });
+    });*/
 
     // Zoom
     canvas.addEventListener("wheel", (event) => {
