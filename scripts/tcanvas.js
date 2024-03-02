@@ -52,8 +52,6 @@ function init()
     winWidth = canvas.width;
     winHeight = canvas.height;
 
-    render();
-
     addEventListener("resize", (event) => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -65,7 +63,7 @@ function init()
     });
 
     // Zoom
-    addEventListener("wheel", (event) => {
+    canvas.addEventListener("wheel", (event) => {
         let diff = (event.deltaY > 0) ? -0.1 : 0.1;
         scale = scale + diff;
 
@@ -77,7 +75,7 @@ function init()
     });
 
     // Translate
-    addEventListener("mousedown", (event) => {
+    canvas.addEventListener("mousedown", (event) => {
         switch(event.button)
         {
             case MOUSE_LEFT:
@@ -90,7 +88,7 @@ function init()
         }
     });
 
-    addEventListener("mousemove", (event) => {
+    canvas.addEventListener("mousemove", (event) => {
         switch(event.button)
         {
             case MOUSE_LEFT:
@@ -99,7 +97,7 @@ function init()
         }
     });
 
-    addEventListener("mouseup", (event) => {
+    canvas.addEventListener("mouseup", (event) => {
         switch(event.button)
         {
             case MOUSE_LEFT:
@@ -118,9 +116,11 @@ function init()
         }
     });   
 
-    addEventListener("contextmenu", (event) => {
+    canvas.addEventListener("contextmenu", (event) => {
         event.preventDefault();
     });
+
+    render();
 }
 
 function translate(event)
