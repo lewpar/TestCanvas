@@ -67,7 +67,7 @@ class TCanvasElement extends HTMLElement {
         this.winHeight = this.canvas.height;
         this.winWidth = this.canvas.width;
 
-        this.addEventListener("scroll", this.onScroll);
+        this.addEventListener("wheel", this.onScroll);
         this.addEventListener("mousedown", this.onMouseDown);
         this.addEventListener("mousemove", this.onMouseMove);
         this.addEventListener("mouseup", this.onMouseUp);
