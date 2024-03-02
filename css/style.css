@@ -16,7 +16,7 @@ body {
     position: relative;
 }
 
-#t-canvas {
+t-canvas {
     display: flex;
 
     border: 1px solid black;
